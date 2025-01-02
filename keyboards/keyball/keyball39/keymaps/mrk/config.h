@@ -39,6 +39,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define POINTING_DEVICE_AUTO_MOUSE_ENABLE
 #define AUTO_MOUSE_DEFAULT_LAYER 1
 #define AUTO_MOUSE_LAYER_KEEP_TIME 30000
-#define KEYBALL_SCROLLSNAP_ENABLE 0
-#define PERMISSIVE_HOLD
-#define RETRO_TAPPING
+//#define KEYBALL_SCROLLSNAP_ENABLE 0
+//#define PERMISSIVE_HOLD
+//#define RETRO_TAPPING
