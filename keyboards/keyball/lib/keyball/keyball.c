@@ -772,9 +772,11 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
             case CPI_D1K:
                 add_cpi(-10);
                 break;
-
             case SCRL_TO:
-                keyball_set_scroll_mode(!keyball.scroll_mode);
+                if (record->event.pressed) {
+                    // スクロールモードをトグル
+                    keyball_set_scroll_mode(!keyball.scroll_mode);
+                }                
                 break;
             case SCRL_DVI:
                 add_scroll_div(1);
