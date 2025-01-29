@@ -21,8 +21,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef __ASSEMBLER__
 
 // Key matrix parameters
-#define MATRIX_MASKED
-#define DEBOUNCE            5
+// #define MATRIX_MASKED
+// #define MATRIX_ROWS  4
+#define MATRIX_ROWS  8
+#define MATRIX_COLS 12
+#define DEBOUNCE     5
 #define DIODE_DIRECTION     COL2ROW
 
 // Split parameters
@@ -72,7 +75,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #undef LOCKING_RESYNC_ENABLE
 
 // BLE Micro Pro
-#define VIAL_KEYBOARD_UID {0x57, 0x3C, 0x33, 0xF6, 0x35, 0x09, 0x7A, 0x29}
+//#define VIAL_KEYBOARD_UID {0x57, 0x3C, 0x33, 0xF6, 0x35, 0x09, 0x7A, 0x29}
 #define MATRIX_ROW_PINS {20,19,18,17}
 #define MATRIX_COL_PINS {7,8,9,10,11,12}
 #define MATRIX_LAYOUT {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,255}

@@ -21,6 +21,80 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "quantum.h"
 
 // clang-format off
+#define LAYOUT_right_ball( \
+    L00, L01, L02, L03, L04,              R04, R03, R02, R01, R00, \
+    L10, L11, L12, L13, L14,              R14, R13, R12, R11, R10, \
+    L20, L21, L22, L23, L24,              R24, R23, R22, R21, R20, \
+    L30, L31, L32, L33, L34, L35,    R35, R34,                R30  \
+    ) \
+    { \
+        {   L00,   L01,   L02,   L03,   L04, KC_NO }, \
+        {   L10,   L11,   L12,   L13,   L14, KC_NO }, \
+        {   L20,   L21,   L22,   L23,   L24, KC_NO }, \
+        {   L30,   L31,   L32,   L33,   L34,   L35 }, \
+        {   R00,   R01,   R02,   R03,   R04, KC_NO }, \
+        {   R10,   R11,   R12,   R13,   R14, KC_NO }, \
+        {   R20,   R21,   R22,   R23,   R24, KC_NO }, \
+        {   R30, KC_NO, KC_NO, KC_NO,   R34,   R35 }, \
+    }
+
+#define LAYOUT_left_ball( \
+    L00, L01, L02, L03, L04,              R04, R03, R02, R01, R00, \
+    L10, L11, L12, L13, L14,              R14, R13, R12, R11, R10, \
+    L20, L21, L22, L23, L24,              R24, R23, R22, R21, R20, \
+    L30,                L34, L35,    R35, R34, R33, R32, R31, R30  \
+    ) \
+    { \
+        {   L00,   L01,   L02,   L03,   L04, KC_NO }, \
+        {   L10,   L11,   L12,   L13,   L14, KC_NO }, \
+        {   L20,   L21,   L22,   L23,   L24, KC_NO }, \
+        {   L30, KC_NO, KC_NO, KC_NO,   L34,   L35 }, \
+        {   R00,   R01,   R02,   R03,   R04, KC_NO }, \
+        {   R10,   R11,   R12,   R13,   R14, KC_NO }, \
+        {   R20,   R21,   R22,   R23,   R24, KC_NO }, \
+        {   R30,   R31,   R32,   R33,   R34,   R35 }, \
+    }
+
+#define LAYOUT_dual_ball( \
+    L00, L01, L02, L03, L04,              R04, R03, R02, R01, R00, \
+    L10, L11, L12, L13, L14,              R14, R13, R12, R11, R10, \
+    L20, L21, L22, L23, L24,              R24, R23, R22, R21, R20, \
+    L30,                L34, L35,    R35, R34,                R30  \
+    ) \
+    { \
+        {   L00,   L01,   L02,   L03,   L04, KC_NO }, \
+        {   L10,   L11,   L12,   L13,   L14, KC_NO }, \
+        {   L20,   L21,   L22,   L23,   L24, KC_NO }, \
+        {   L30, KC_NO, KC_NO, KC_NO,   L34,   L35 }, \
+        {   R00,   R01,   R02,   R03,   R04, KC_NO }, \
+        {   R10,   R11,   R12,   R13,   R14, KC_NO }, \
+        {   R20,   R21,   R22,   R23,   R24, KC_NO }, \
+        {   R30, KC_NO, KC_NO, KC_NO,   R34,   R35 }, \
+    }
+
+#define LAYOUT_no_ball( \
+    L00, L01, L02, L03, L04,              R04, R03, R02, R01, R00, \
+    L10, L11, L12, L13, L14,              R14, R13, R12, R11, R10, \
+    L20, L21, L22, L23, L24,              R24, R23, R22, R21, R20, \
+    L30, L31, L32, L33, L34, L35,    R35, R34, R33, R32, R31, R30  \
+    ) \
+    { \
+        {   L00,   L01,   L02,   L03,   L04, KC_NO }, \
+        {   L10,   L11,   L12,   L13,   L14, KC_NO }, \
+        {   L20,   L21,   L22,   L23,   L24, KC_NO }, \
+        {   L30,   L31,   L32,   L33,   L34,   L35 }, \
+        {   R00,   R01,   R02,   R03,   R04, KC_NO }, \
+        {   R10,   R11,   R12,   R13,   R14, KC_NO }, \
+        {   R20,   R21,   R22,   R23,   R24, KC_NO }, \
+        {   R30,   R31,   R32,   R33,   R34,   R35 }, \
+    }
+
+// clang-format on
+
+#define LAYOUT LAYOUT_right_ball
+#define LAYOUT_universal LAYOUT_no_ball
+
+// clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // keymap for default (VIA)
   [0] = LAYOUT_universal(
@@ -45,6 +119,34 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [3] = LAYOUT_universal(
+    RGB_TOG  , AML_TO   , AML_I50  , AML_D50  , _______  ,                            RGB_M_P  , RGB_M_B  , RGB_M_R  , RGB_M_SW , RGB_M_SN ,
+    RGB_MOD  , RGB_HUI  , RGB_SAI  , RGB_VAI  , SCRL_DVI ,                            RGB_M_K  , RGB_M_X  , RGB_M_G  , RGB_M_T  , RGB_M_TW ,
+    RGB_RMOD , RGB_HUD  , RGB_SAD  , RGB_VAD  , SCRL_DVD ,                            CPI_D1K  , CPI_D100 , CPI_I100 , CPI_I1K  , KBC_SAVE ,
+    QK_BOOT  , KBC_RST  , _______  , _______  , _______  , _______  ,      _______  , _______  , _______  , _______  , KBC_RST  , QK_BOOT
+  ),
+
+  [4] = LAYOUT_universal(
+    RGB_TOG  , AML_TO   , AML_I50  , AML_D50  , _______  ,                            RGB_M_P  , RGB_M_B  , RGB_M_R  , RGB_M_SW , RGB_M_SN ,
+    RGB_MOD  , RGB_HUI  , RGB_SAI  , RGB_VAI  , SCRL_DVI ,                            RGB_M_K  , RGB_M_X  , RGB_M_G  , RGB_M_T  , RGB_M_TW ,
+    RGB_RMOD , RGB_HUD  , RGB_SAD  , RGB_VAD  , SCRL_DVD ,                            CPI_D1K  , CPI_D100 , CPI_I100 , CPI_I1K  , KBC_SAVE ,
+    QK_BOOT  , KBC_RST  , _______  , _______  , _______  , _______  ,      _______  , _______  , _______  , _______  , KBC_RST  , QK_BOOT
+  ),
+
+  [5] = LAYOUT_universal(
+    RGB_TOG  , AML_TO   , AML_I50  , AML_D50  , _______  ,                            RGB_M_P  , RGB_M_B  , RGB_M_R  , RGB_M_SW , RGB_M_SN ,
+    RGB_MOD  , RGB_HUI  , RGB_SAI  , RGB_VAI  , SCRL_DVI ,                            RGB_M_K  , RGB_M_X  , RGB_M_G  , RGB_M_T  , RGB_M_TW ,
+    RGB_RMOD , RGB_HUD  , RGB_SAD  , RGB_VAD  , SCRL_DVD ,                            CPI_D1K  , CPI_D100 , CPI_I100 , CPI_I1K  , KBC_SAVE ,
+    QK_BOOT  , KBC_RST  , _______  , _______  , _______  , _______  ,      _______  , _______  , _______  , _______  , KBC_RST  , QK_BOOT
+  ),
+
+  [6] = LAYOUT_universal(
+    RGB_TOG  , AML_TO   , AML_I50  , AML_D50  , _______  ,                            RGB_M_P  , RGB_M_B  , RGB_M_R  , RGB_M_SW , RGB_M_SN ,
+    RGB_MOD  , RGB_HUI  , RGB_SAI  , RGB_VAI  , SCRL_DVI ,                            RGB_M_K  , RGB_M_X  , RGB_M_G  , RGB_M_T  , RGB_M_TW ,
+    RGB_RMOD , RGB_HUD  , RGB_SAD  , RGB_VAD  , SCRL_DVD ,                            CPI_D1K  , CPI_D100 , CPI_I100 , CPI_I1K  , KBC_SAVE ,
+    QK_BOOT  , KBC_RST  , _______  , _______  , _______  , _______  ,      _______  , _______  , _______  , _______  , KBC_RST  , QK_BOOT
+  ), 
+
+  [7] = LAYOUT_universal(
     RGB_TOG  , AML_TO   , AML_I50  , AML_D50  , _______  ,                            RGB_M_P  , RGB_M_B  , RGB_M_R  , RGB_M_SW , RGB_M_SN ,
     RGB_MOD  , RGB_HUI  , RGB_SAI  , RGB_VAI  , SCRL_DVI ,                            RGB_M_K  , RGB_M_X  , RGB_M_G  , RGB_M_T  , RGB_M_TW ,
     RGB_RMOD , RGB_HUD  , RGB_SAD  , RGB_VAD  , SCRL_DVD ,                            CPI_D1K  , CPI_D100 , CPI_I100 , CPI_I1K  , KBC_SAVE ,
