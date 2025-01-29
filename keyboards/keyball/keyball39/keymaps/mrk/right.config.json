@@ -10,7 +10,7 @@
     "matrix": {
       "rows": 8,
       "cols": 6,
-      "layer": 7,
+      "layer": 8,
       "device_rows": 4,
       "device_cols": 6,
       "debounce": 1,
